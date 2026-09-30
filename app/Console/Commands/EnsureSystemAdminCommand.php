@@ -5,30 +5,60 @@ namespace App\Console\Commands;
 use App\Domains\Auth\Models\Permission;
 use App\Domains\Auth\Models\Role;
 use App\Models\User;
+use App\Support\PasswordPolicy;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 /**
- * Restaura la cuenta administrador principal (útil si se eliminó por error desde el panel).
+ * Crea o restaura el administrador principal con una contraseña solicitada de forma oculta.
  */
 class EnsureSystemAdminCommand extends Command
 {
     protected $signature = 'clinica:ensure-admin
-                            {--email=admin@tecnoweb.shop : Correo del administrador principal}
-                            {--password=Admin@2026! : Contraseña en texto plano}
-                            {--name=Administrador de Sistema : Nombre visible en el panel}';
+                            {--email=admin@tecnoweb.shop : Administrator email address}
+                            {--name=Administrador de Sistema : Display name}';
 
-    protected $description = 'Crea o restaura el usuario Administrador principal con rol y permisos completos.';
+    protected $description = 'Crea o restaura el administrador principal de forma segura.';
 
     public function handle(): int
     {
         $email = (string) $this->option('email');
-        $plainPassword = (string) $this->option('password');
         $name = (string) $this->option('name');
+
+        $identityValidator = Validator::make(
+            ['email' => $email, 'name' => $name],
+            ['email' => ['required', 'email', 'max:255'], 'name' => ['required', 'string', 'max:255']],
+        );
+
+        if ($identityValidator->fails()) {
+            foreach ($identityValidator->errors()->all() as $message) {
+                $this->error($message);
+            }
+
+            return self::FAILURE;
+        }
 
         $adminRole = Role::query()->where('name', 'Administrador')->first();
         if ($adminRole === null) {
-            $this->error('No existe el rol «Administrador». Ejecute antes: php artisan db:seed --class=App\\Domains\\Auth\\Seeders\\AuthSeeder');
+            $this->error('No existe el rol «Administrador». Ejecute primero: php artisan db:seed --force');
+
+            return self::FAILURE;
+        }
+
+        $plainPassword = $this->secret('Ingrese una contraseña nueva para el administrador');
+        $passwordConfirmation = $this->secret('Confirme la contraseña');
+
+        $validator = Validator::make(
+            ['password' => $plainPassword, 'password_confirmation' => $passwordConfirmation],
+            ['password' => PasswordPolicy::rules(confirmed: true)],
+            PasswordPolicy::validationMessages(),
+        );
+
+        if ($validator->fails()) {
+            foreach ($validator->errors()->all() as $message) {
+                $this->error($message);
+            }
 
             return self::FAILURE;
         }
@@ -65,7 +95,7 @@ class EnsureSystemAdminCommand extends Command
         $this->newLine();
         $this->table(['Campo', 'Valor'], [
             ['Correo', $email],
-            ['Contraseña', $plainPassword],
+            ['Contraseña', 'guardada; no se muestra'],
             ['Panel', url('/admin/login')],
         ]);
 

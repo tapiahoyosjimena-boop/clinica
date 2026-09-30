@@ -34,5 +34,5 @@ Accesos habituales:
 ```bash
 php artisan samples:setup-permissions   # permisos legacy de muestras (si aplica)
 php artisan permissions:reconcile-users
-php artisan clinica:ensure-admin
+php artisan clinica:ensure-admin       # pide la contraseña de forma oculta
 ```

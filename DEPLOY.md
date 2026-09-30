@@ -64,19 +64,21 @@ CLINIC_ACCOUNT_NUMBER=...
 
 ```bash
 php artisan migrate --force
+php artisan db:seed --force
+php artisan clinica:ensure-admin
 ```
 
-> **Producción:** No ejecutes `php artisan db:seed --force` en un sitio público. El seeder general crea cuentas demo con contraseñas conocidas que están en el código. La inicialización de roles, catálogo y de la cuenta administradora debe hacerse con un procedimiento de producción seguro antes de habilitar el sitio.
+En `APP_ENV=production`, el seeder inicializa roles y permisos sin crear cuentas de personal demo y omite el inventario de reactivos de demostración. El comando `clinica:ensure-admin` solicitará la contraseña de forma oculta y su confirmación; usa una contraseña única que cumpla la política configurada. No pases contraseñas como argumentos de terminal.
 
 > **Nota:** `db:seed` carga automáticamente (en este orden):
 >
-> 1. **AuthSeeder** — roles, permisos y usuarios del sistema (admin, recepción, laboratorio, imagen, médico).
+> 1. **AuthSeeder** — roles y permisos del sistema; las cuentas de personal demo solo se crean fuera de producción.
 > 2. **ImagingEquipmentSeeder** — equipos de rayos X, ecógrafo y tomógrafo.
 > 3. **CatalogSeeder** — 10 categorías y 46 exámenes del catálogo.
 > 4. **ExamRequirementsSeeder** — requisitos previos por examen (ayuno, preparación, etc.).
 > 5. **LaboratoryExamParametersSeeder** — parámetros analíticos por categoría de laboratorio.
 > 6. **PaymentMethodSeeder** — métodos de pago (Efectivo, QR).
-> 7. **ReactivosSeeder** — proveedores y reactivos de demostración.
+> 7. **ReactivosSeeder** — proveedores y reactivos de demostración (solo fuera de producción).
 >
 > En VPS con catálogo ya cargado, solo requisitos (reemplaza los de cada examen del catálogo):
 >
@@ -163,7 +165,7 @@ En un servidor real se recomienda `supervisor` para mantener el worker activo.
 
 ## 9. Credenciales del demo (solo desarrollo o staging aislado)
 
-El **AuthSeeder** crea cuentas con contraseñas fijas de demostración. La tabla siguiente es solo para entornos aislados de desarrollo o staging; nunca uses estas credenciales en un servidor accesible desde Internet.
+Fuera de producción, el **AuthSeeder** crea cuentas con contraseñas fijas de demostración. La tabla siguiente es solo para entornos aislados de desarrollo o staging; nunca uses estas credenciales en un servidor accesible desde Internet. En producción, sigue el procedimiento de la sección 4 para crear el administrador.
 
 | Rol | Email | Contraseña | Acceso |
 |---|---|---|---|
@@ -175,13 +177,13 @@ El **AuthSeeder** crea cuentas con contraseñas fijas de demostración. La tabla
 
 Los pacientes se crean al registrar pacientes con correo (cuenta portal automática).
 
-Si se eliminó por error el administrador principal:
+Para crear o restablecer el administrador principal:
 
 ```bash
 php artisan clinica:ensure-admin
 ```
 
-Eso restaura `admin@tecnoweb.shop` / `Admin@2026!` con todos los permisos.
+El comando pedirá una contraseña oculta y su confirmación; no muestra ni imprime la contraseña.
 
 Para cuentas con rol **Paciente**, suele usarse el patrón de prueba `2026CN` + últimos 4 dígitos del CI (si así se configuró al crear el usuario).
 

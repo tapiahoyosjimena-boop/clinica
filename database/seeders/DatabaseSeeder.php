@@ -10,14 +10,19 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        $this->call([
+        $seeders = [
             AuthSeeder::class,
             ImagingEquipmentSeeder::class,
             CatalogSeeder::class,
             ExamRequirementsSeeder::class,
             LaboratoryExamParametersSeeder::class,
             PaymentMethodSeeder::class,
-            ReactivosSeeder::class,
-        ]);
+        ];
+
+        if (! app()->environment('production')) {
+            $seeders[] = ReactivosSeeder::class;
+        }
+
+        $this->call($seeders);
     }
 }

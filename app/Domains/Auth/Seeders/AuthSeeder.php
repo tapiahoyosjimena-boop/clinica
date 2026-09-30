@@ -84,6 +84,13 @@ class AuthSeeder extends Seeder
             SystemPermissions::patientPortalModulePermissionNames(),
         ));
 
+        if (app()->environment('production')) {
+            app()[PermissionRegistrar::class]->forgetCachedPermissions();
+            $this->command?->info('Roles y permisos inicializados. No se crearon cuentas demo en producción.');
+
+            return;
+        }
+
         $this->seedStaffUser(
             email: SystemAdministratorGuard::PRIMARY_EMAIL,
             name: 'Administrador de Sistema',
