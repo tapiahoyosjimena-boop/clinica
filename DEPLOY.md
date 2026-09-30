@@ -64,8 +64,9 @@ CLINIC_ACCOUNT_NUMBER=...
 
 ```bash
 php artisan migrate --force
-php artisan db:seed --force
 ```
+
+> **Producción:** No ejecutes `php artisan db:seed --force` en un sitio público. El seeder general crea cuentas demo con contraseñas conocidas que están en el código. La inicialización de roles, catálogo y de la cuenta administradora debe hacerse con un procedimiento de producción seguro antes de habilitar el sitio.
 
 > **Nota:** `db:seed` carga automáticamente (en este orden):
 >
@@ -87,9 +88,11 @@ php artisan db:seed --force
 >
 > Los seeders son **idempotentes**: no duplican registros si se ejecutan más de una vez.
 
-### Datos demo operativos (VPS)
+### Datos demo (solo desarrollo o staging aislado)
 
-Tras el seed base, para poblar pacientes de prueba adicionales (no sustituyen a los ya registrados en el panel):
+No ejecutes estos seeders en producción: crean usuarios y datos de prueba con credenciales predecibles.
+
+En desarrollo o staging aislado, tras el seed base, se pueden poblar pacientes de prueba adicionales:
 
 ```bash
 php artisan db:seed --class=DoctorsDemoSeeder --force
@@ -158,9 +161,9 @@ En un servidor real se recomienda `supervisor` para mantener el worker activo.
 
 ---
 
-## 9. Credenciales del demo
+## 9. Credenciales del demo (solo desarrollo o staging aislado)
 
-Tras `php artisan db:seed`, el **AuthSeeder** crea estas cuentas (además de roles y permisos):
+El **AuthSeeder** crea cuentas con contraseñas fijas de demostración. La tabla siguiente es solo para entornos aislados de desarrollo o staging; nunca uses estas credenciales en un servidor accesible desde Internet.
 
 | Rol | Email | Contraseña | Acceso |
 |---|---|---|---|
