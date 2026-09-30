@@ -1,0 +1,330 @@
+:root {
+    --cn-green: #2eb67d;
+    --cn-green-dark: #259966;
+    --cn-lime: #c8f135;
+    --cn-bg: #f8fafc;
+    --cn-white: #ffffff;
+    --cn-text: #111827;
+    --cn-muted: #6b7280;
+    --cn-border: #e5e7eb;
+    --cn-radius: 12px;
+    --cn-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    --cn-max: 1100px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body.cn-welcome {
+    font-family: Inter, 'Segoe UI', system-ui, sans-serif;
+    background: var(--cn-bg);
+    color: var(--cn-text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+.cn-welcome a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.cn-welcome__header {
+    background: var(--cn-white);
+    border-bottom: 3px solid var(--cn-green);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    box-shadow: 0 1px 0 var(--cn-border);
+}
+
+.cn-welcome__header-inner {
+    max-width: var(--cn-max);
+    margin: 0 auto;
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.25rem;
+}
+
+.cn-welcome__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+.cn-welcome__brand img {
+    width: 2.75rem;
+    height: 2.75rem;
+    flex-shrink: 0;
+}
+
+.cn-welcome__brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.cn-welcome__brand-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--cn-green);
+}
+
+.cn-welcome__brand-tag {
+    font-size: 0.72rem;
+    color: var(--cn-muted);
+    font-weight: 500;
+}
+
+.cn-welcome__search {
+    flex: 1;
+    min-width: min(100%, 16rem);
+    max-width: 28rem;
+}
+
+.cn-welcome__header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+}
+
+.cn-welcome__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 8px;
+    border: 1.5px solid transparent;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+    white-space: nowrap;
+}
+
+.cn-welcome__btn--ghost {
+    color: var(--cn-text);
+    border-color: var(--cn-border);
+    background: var(--cn-white);
+}
+
+.cn-welcome__btn--ghost:hover {
+    border-color: var(--cn-green);
+    color: var(--cn-green-dark);
+}
+
+.cn-welcome__btn--primary {
+    background: var(--cn-green);
+    color: #fff;
+}
+
+.cn-welcome__btn--primary:hover {
+    background: var(--cn-green-dark);
+}
+
+.cn-welcome__main {
+    flex: 1;
+}
+
+.cn-welcome__hero {
+    max-width: var(--cn-max);
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 2rem;
+    text-align: center;
+}
+
+.cn-welcome__hero h1 {
+    font-size: clamp(1.65rem, 4vw, 2.35rem);
+    font-weight: 800;
+    color: var(--cn-text);
+    letter-spacing: -0.02em;
+    max-width: 20ch;
+    margin: 0 auto 0.75rem;
+}
+
+.cn-welcome__hero h1 span {
+    color: var(--cn-green);
+}
+
+.cn-welcome__hero-lead {
+    font-size: 1.05rem;
+    color: var(--cn-muted);
+    max-width: 42ch;
+    margin: 0 auto 1.75rem;
+}
+
+.cn-welcome__portals {
+    max-width: var(--cn-max);
+    margin: 0 auto;
+    padding: 0 1.25rem 2.5rem;
+}
+
+.cn-welcome__portals-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--cn-muted);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.cn-welcome__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+}
+
+.cn-welcome__card {
+    background: var(--cn-white);
+    border: 1px solid var(--cn-border);
+    border-radius: var(--cn-radius);
+    padding: 1.5rem;
+    box-shadow: var(--cn-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+
+.cn-welcome__card:hover {
+    border-color: var(--cn-green);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(46, 182, 125, 0.12);
+}
+
+.cn-welcome__card-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(46, 182, 125, 0.12);
+    color: var(--cn-green-dark);
+}
+
+.cn-welcome__card-icon svg {
+    width: 1.35rem;
+    height: 1.35rem;
+}
+
+.cn-welcome__card h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.cn-welcome__card p {
+    font-size: 0.88rem;
+    color: var(--cn-muted);
+    flex: 1;
+}
+
+.cn-welcome__card-link {
+    margin-top: 0.35rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--cn-green-dark);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.cn-welcome__card:hover .cn-welcome__card-link {
+    text-decoration: underline;
+}
+
+.cn-welcome__services {
+    background: var(--cn-white);
+    border-top: 1px solid var(--cn-border);
+    border-bottom: 1px solid var(--cn-border);
+    padding: 2.5rem 1.25rem;
+}
+
+.cn-welcome__services-inner {
+    max-width: var(--cn-max);
+    margin: 0 auto;
+}
+
+.cn-welcome__services h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.cn-welcome__features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+}
+
+.cn-welcome__feature {
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.cn-welcome__feature strong {
+    display: block;
+    font-size: 0.95rem;
+    margin-bottom: 0.35rem;
+    color: var(--cn-text);
+}
+
+.cn-welcome__feature span {
+    font-size: 0.85rem;
+    color: var(--cn-muted);
+}
+
+.cn-welcome__footer {
+    margin-top: auto;
+    padding: 1.25rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--cn-muted);
+}
+
+.cn-welcome .home-search--welcome {
+    max-width: none;
+    margin-bottom: 0;
+}
+
+.cn-welcome .home-search--welcome .home-search__wrap {
+    background: var(--cn-bg);
+}
+
+@media (max-width: 640px) {
+    .cn-welcome__header-inner {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cn-welcome__search {
+        max-width: none;
+        order: 3;
+    }
+
+    .cn-welcome__header-actions {
+        margin-left: 0;
+        justify-content: stretch;
+    }
+
+    .cn-welcome__header-actions .cn-welcome__btn {
+        flex: 1;
+    }
+}

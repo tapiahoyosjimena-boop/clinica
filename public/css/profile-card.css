@@ -1,0 +1,190 @@
+/**
+ * Ficha de perfil compartida: portales (paciente/médico) y panel admin.
+ * Requiere clase .dark en <html> para modo oscuro (portales + Filament).
+ */
+
+.profile-card-wrap {
+    background: var(--white, #ffffff);
+    border: 1px solid var(--border, #e5e7eb);
+    border-radius: var(--radius, 10px);
+    overflow: hidden;
+}
+
+.profile-card-header {
+    padding: 1.75rem 1.5rem;
+    border-bottom: 1px solid var(--border, #e5e7eb);
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.profile-avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: #2eb67d;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    letter-spacing: 0.05em;
+}
+
+.profile-info h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text, #111827);
+    margin-bottom: 0.2rem;
+}
+
+.profile-info .profile-role {
+    font-size: 0.8rem;
+    color: var(--muted, #6b7280);
+}
+
+.profile-fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0;
+}
+
+.profile-field {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border, #e5e7eb);
+    border-right: 1px solid var(--border, #e5e7eb);
+}
+
+.profile-field.is-full-width {
+    grid-column: 1 / -1;
+    border-right: none;
+    border-bottom: none;
+}
+
+.profile-field label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.25rem;
+}
+
+.profile-field .profile-field-value,
+.profile-field > span:not(.empty-val) {
+    font-size: 0.9rem;
+    color: var(--text, #111827);
+    font-weight: 500;
+}
+
+.profile-field span.empty-val {
+    color: #d1d5db;
+    font-style: italic;
+}
+
+.profile-field-muted {
+    color: var(--muted, #9ca3af);
+    font-size: 0.8rem;
+}
+
+@media (max-width: 640px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-field {
+        border-right: none;
+    }
+
+    .profile-field:last-child {
+        border-bottom: none;
+    }
+}
+
+/* ── Modo oscuro ─────────────────────────────────────────────────── */
+.dark .profile-card-wrap {
+    background: var(--cn-dark-surface, #0f1117) !important;
+    border-color: var(--cn-dark-border, rgba(148, 163, 184, 0.12)) !important;
+}
+
+.dark .profile-card-header {
+    border-bottom-color: var(--cn-dark-border, rgba(148, 163, 184, 0.12)) !important;
+}
+
+.dark .profile-info h2 {
+    color: var(--cn-dark-text, #e2e8f0) !important;
+}
+
+.dark .profile-info .profile-role {
+    color: var(--cn-dark-muted, #94a3b8) !important;
+}
+
+.dark .profile-field {
+    border-bottom-color: var(--cn-dark-border, rgba(148, 163, 184, 0.12)) !important;
+    border-right-color: var(--cn-dark-border, rgba(148, 163, 184, 0.12)) !important;
+}
+
+.dark .profile-field label {
+    color: var(--cn-dark-muted, #94a3b8) !important;
+}
+
+.dark .profile-field .profile-field-value,
+.dark .profile-field > span:not(.empty-val) {
+    color: var(--cn-dark-text, #e2e8f0) !important;
+}
+
+.dark .profile-field span.empty-val {
+    color: var(--cn-dark-muted, #94a3b8) !important;
+}
+
+.dark .profile-field-muted {
+    color: var(--cn-dark-muted, #94a3b8) !important;
+}
+
+/* Panel admin: ancho cómodo dentro del contenido Filament */
+.fi-page .profile-card-wrap {
+    max-width: 960px;
+}
+
+/* Alertas (vista perfil) */
+.profile-alert {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+}
+
+.profile-alert.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.profile-alert-success {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.profile-alert-error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.dark .profile-alert-success {
+    background: rgba(46, 182, 125, 0.18) !important;
+    color: #86efac !important;
+}
+
+.dark .profile-alert-error {
+    background: rgba(127, 29, 29, 0.35) !important;
+    color: #fecaca !important;
+}

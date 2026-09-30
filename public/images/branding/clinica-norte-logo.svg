@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 290 64" fill="none" role="img" aria-label="Clinica Norte logo" preserveAspectRatio="xMidYMid meet">
+  <circle cx="32" cy="32" r="28" fill="#2EB67D" />
+  <rect x="27.5" y="16" width="9" height="32" rx="4.5" fill="#FFFFFF" />
+  <rect x="16" y="27.5" width="32" height="9" rx="4.5" fill="#FFFFFF" />
+  <text text-anchor="end" x="59" y="56" font-size="18" font-family="Inter, system-ui, sans-serif" font-weight="800" fill="#C8F135">N</text>
+
+  <text x="70" y="30" font-size="24" font-family="Inter, system-ui, sans-serif" font-weight="700" fill="#2EB67D">Clinica Norte</text>
+  <text x="70" y="50" font-size="13" font-family="Inter, system-ui, sans-serif" font-weight="400" fill="#6B7280">S.R.L. - Panel Admin</text>
+</svg>

@@ -1,0 +1,676 @@
+/*
+ * Clínica Norte — Portales paciente / médico (Blade)
+ * Modo oscuro alineado con clinica-norte-admin.css (.dark + variables --cn-dark-*)
+ */
+
+.dark {
+    --cn-dark-bg: #0a0a0f;
+    --cn-dark-surface: #0f1117;
+    --cn-dark-surface-elevated: #141820;
+    --cn-dark-border: rgba(148, 163, 184, 0.12);
+    --cn-dark-border-strong: rgba(46, 182, 125, 0.22);
+    --cn-dark-text: #e2e8f0;
+    --cn-dark-muted: #94a3b8;
+    --cn-dark-accent: #2eb67d;
+}
+
+.dark body {
+    background-color: var(--cn-dark-bg) !important;
+    color: var(--cn-dark-text) !important;
+}
+
+/* ── Conmutador de tema (segmento tipo Filament) ─────────────────── */
+.portal-theme-wrap {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.portal-theme-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.portal-theme-seg {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px;
+    border-radius: 8px;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    gap: 0;
+}
+
+.dark .portal-theme-seg {
+    background: var(--cn-dark-surface-elevated);
+    border-color: var(--cn-dark-border);
+}
+
+.portal-theme-seg button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 28px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: #64748b;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.portal-theme-seg button:hover {
+    color: #2eb67d;
+    background: rgba(46, 182, 125, 0.08);
+}
+
+.portal-theme-seg button.is-active {
+    background: #ffffff;
+    color: #2eb67d;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+}
+
+.dark .portal-theme-seg button {
+    color: var(--cn-dark-muted);
+}
+
+.dark .portal-theme-seg button:hover {
+    color: var(--cn-dark-accent);
+    background: rgba(46, 182, 125, 0.1);
+}
+
+.dark .portal-theme-seg button.is-active {
+    background: rgba(46, 182, 125, 0.18);
+    color: var(--cn-dark-accent);
+    box-shadow: 0 0 10px rgba(46, 182, 125, 0.25);
+}
+
+.portal-theme-seg button svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* ── Login (paciente / médico) ───────────────────────────────────── */
+.dark .login-box {
+    background: var(--cn-dark-surface) !important;
+    border-color: var(--cn-dark-border) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45) !important;
+}
+
+.dark .login-logo .clinic-name {
+    color: var(--cn-dark-accent) !important;
+}
+
+.dark .login-welcome,
+.dark .footer-text {
+    color: var(--cn-dark-muted) !important;
+}
+
+/* ── Link "¿Olvidaste tu contraseña?" en login de portales ──────────────── */
+.portal-forgot-link {
+    display: block;
+    text-align: center;
+    margin-top: 0.9rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #2EB67D;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+
+.portal-forgot-link:hover {
+    color: #259966;
+    text-decoration: underline;
+}
+
+.dark .portal-forgot-link {
+    color: var(--cn-dark-accent) !important;
+}
+
+.dark .portal-forgot-link:hover {
+    color: #5dd3a3 !important;
+}
+
+/* ── Vistas de recuperación de contraseña (request + confirm) ───────────── */
+.dark .login-subtitle {
+    color: var(--cn-dark-muted) !important;
+}
+
+.dark .alert-success {
+    background: rgba(6, 95, 70, 0.25) !important;
+    border-color: rgba(110, 231, 183, 0.3) !important;
+    color: #6ee7b7 !important;
+}
+
+.dark .back-link {
+    color: var(--cn-dark-accent) !important;
+}
+
+.dark .back-link:hover {
+    color: #5dd3a3 !important;
+}
+
+.dark h2.login-title,
+.dark label {
+    color: var(--cn-dark-text) !important;
+}
+
+.dark input[type="email"],
+.dark input[type="password"],
+.dark input[type="text"],
+.dark input[type="tel"],
+.dark textarea,
+.dark select {
+    background: var(--cn-dark-surface-elevated) !important;
+    border-color: var(--cn-dark-border) !important;
+    color: var(--cn-dark-text) !important;
+}
+
+.dark select option {
+    background: var(--cn-dark-surface);
+    color: var(--cn-dark-text);
+}
+
+.dark input:focus {
+    border-color: var(--cn-dark-accent) !important;
+}
+
+.dark .password-toggle {
+    border-left-color: var(--cn-dark-border) !important;
+    color: var(--cn-dark-muted) !important;
+}
+
+.dark .password-toggle:hover {
+    color: var(--cn-dark-text) !important;
+    background: rgba(46, 182, 125, 0.08) !important;
+}
+
+.dark .alert-error {
+    background: rgba(127, 29, 29, 0.35) !important;
+    border-color: rgba(248, 113, 113, 0.35) !important;
+    color: #fecaca !important;
+}
+
+/* ── Cabecera / nav / footer portales ───────────────────────────── */
+.dark .pp-header {
+    background: rgba(15, 17, 23, 0.92) !important;
+    border-bottom-color: var(--cn-dark-border-strong) !important;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.35) !important;
+}
+
+.dark .pp-brand {
+    color: var(--cn-dark-text) !important;
+}
+
+.dark .pp-brand-name {
+    color: var(--cn-dark-accent) !important;
+}
+
+.dark .pp-brand-sub,
+.dark .pp-user-name {
+    color: var(--cn-dark-muted) !important;
+}
+
+.dark .pp-logout {
+    border-color: var(--cn-dark-border) !important;
+    color: var(--cn-dark-muted) !important;
+}
+
+.dark .pp-logout:hover {
+    border-color: #f87171 !important;
+    color: #fecaca !important;
+}
+
+.dark .pp-nav {
+    background: var(--cn-dark-surface) !important;
+    border-bottom-color: var(--cn-dark-border) !important;
+}
+
+.dark .pp-nav a {
+    color: var(--cn-dark-muted) !important;
+}
+
+.dark .pp-nav a:hover {
+    color: var(--cn-dark-accent) !important;
+}
+
+.dark .pp-nav a.active {
+    color: var(--cn-dark-accent) !important;
+    border-bottom-color: var(--cn-dark-accent) !important;
+}
+
+.dark .pp-page-title {
+    color: var(--cn-dark-text) !important;
+}
+
+.dark .pp-page-sub {
+    color: var(--cn-dark-muted) !important;
+}
+
+.dark .pp-card {
+    background: var(--cn-dark-surface) !important;
+    border-color: var(--cn-dark-border) !important;
+}
+
+.dark .pp-footer {
+    background: var(--cn-dark-surface) !important;
+    border-top-color: var(--cn-dark-border) !important;
+    color: var(--cn-dark-muted) !important;
+}
+
+.cn-page-visits--portal {
+    font-size: 0.74rem;
+    color: var(--muted, var(--cn-muted, #6b7280));
+}
+
+.dark .cn-page-visits--portal {
+    color: var(--cn-dark-muted) !important;
+}
+
+.cn-page-visits--minimal {
+    font-size: 0.7rem;
+    color: var(--muted, var(--cn-muted, #6b7280));
+    margin-top: 0.35rem;
+    text-align: center;
+}
+
+.dark .cn-page-visits--minimal {
+    color: var(--cn-dark-muted) !important;
+}
+
+/* ── Tablas ─────────────────────────────────────────────────────── */
+.dark .pp-table th {
+    background: var(--cn-dark-surface-elevated) !important;
+    color: var(--cn-dark-muted) !important;
+    border-bottom-color: var(--cn-dark-border) !important;
+}
+
+.dark .pp-table td {
+    border-bottom-color: var(--cn-dark-border) !important;
+    color: var(--cn-dark-text) !important;
+}
+
+.dark .pp-table tr:hover td {
+    background: rgba(46, 182, 125, 0.06) !important;
+}
+
+/* ── Badges ─────────────────────────────────────────────────────── */
+.dark .badge-green {
+    background: rgba(46, 182, 125, 0.2) !important;
+    color: #86efac !important;
+}
+
+.dark .badge-yellow {
+    background: rgba(234, 179, 8, 0.2) !important;
+    color: #fde047 !important;
+}
+
+.dark .badge-blue {
+    background: rgba(59, 130, 246, 0.2) !important;
+    color: #93c5fd !important;
+}
+
+.dark .badge-gray {
+    background: rgba(148, 163, 184, 0.15) !important;
+    color: var(--cn-dark-muted) !important;
+}
+
+.dark .badge-red {
+    background: rgba(248, 113, 113, 0.15) !important;
+    color: #fecaca !important;
+}
+
+/* ── Botones ────────────────────────────────────────────────────── */
+.dark .btn-primary {
+    background: var(--cn-dark-accent) !important;
+    color: #0a0a0f !important;
+}
+
+.dark .btn-outline {
+    border-color: var(--cn-dark-accent) !important;
+    color: var(--cn-dark-accent) !important;
+}
+
+/* ── Empty / paginación ─────────────────────────────────────────── */
+.dark .pp-empty {
+    color: var(--cn-dark-muted) !important;
+}
+
+.dark .pp-pagination {
+    border-top-color: var(--cn-dark-border) !important;
+}
+
+.dark .pp-pagination .page-link {
+    border-color: var(--cn-dark-border) !important;
+    color: var(--cn-dark-muted) !important;
+    background: var(--cn-dark-surface-elevated) !important;
+}
+
+.dark .pp-pagination .page-link:hover:not(.active) {
+    border-color: var(--cn-dark-accent) !important;
+    color: var(--cn-dark-accent) !important;
+}
+
+.dark .pp-pagination .page-link.active {
+    background: var(--cn-dark-accent) !important;
+    color: #0a0a0f !important;
+    border-color: var(--cn-dark-accent) !important;
+}
+
+/* ── Campana notificaciones ─────────────────────────────────────── */
+.dark .pp-bell-btn {
+    background: var(--cn-dark-surface-elevated) !important;
+    border-color: var(--cn-dark-border) !important;
+    color: var(--cn-dark-muted) !important;
+}
+
+.dark .pp-bell-btn:hover {
+    border-color: var(--cn-dark-accent) !important;
+    color: var(--cn-dark-accent) !important;
+}
+
+.dark .pp-bell-panel {
+    background: var(--cn-dark-surface) !important;
+    border-color: var(--cn-dark-border) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+.dark .pp-bell-panel-header {
+    border-bottom-color: var(--cn-dark-border) !important;
+    color: var(--cn-dark-text) !important;
+}
+
+.dark .pp-bell-item {
+    color: var(--cn-dark-text) !important;
+    border-bottom-color: var(--cn-dark-border) !important;
+}
+
+.dark .pp-bell-item:hover {
+    background: rgba(46, 182, 125, 0.08) !important;
+}
+
+.dark .pp-bell-item.unread {
+    background: rgba(46, 182, 125, 0.12) !important;
+    border-left-color: var(--cn-dark-accent) !important;
+}
+
+.dark .pp-bell-item time {
+    color: var(--cn-dark-muted) !important;
+}
+
+.dark .pp-bell-empty {
+    color: var(--cn-dark-muted) !important;
+}
+
+.dark .pp-bell-panel-footer {
+    border-top-color: var(--cn-dark-border) !important;
+}
+
+.dark .pp-bell-link {
+    color: var(--cn-dark-accent) !important;
+}
+
+.dark .pp-bell-footer-btn {
+    background: var(--cn-dark-surface-elevated) !important;
+    border-color: var(--cn-dark-border) !important;
+    color: var(--cn-dark-muted) !important;
+}
+
+.dark .pp-bell-footer-btn:hover {
+    border-color: var(--cn-dark-accent) !important;
+    color: var(--cn-dark-accent) !important;
+}
+
+.dark .notif-unread {
+    background: rgba(46, 182, 125, 0.12) !important;
+}
+
+.dark .notif-unread td {
+    border-left-color: var(--cn-dark-accent) !important;
+}
+
+.dark .pp-notif-msg-link,
+.dark .pp-notif-date-link {
+    border-bottom-color: var(--cn-dark-muted) !important;
+}
+
+.dark .pp-notif-msg-link:hover,
+.dark .pp-notif-date-link:hover {
+    color: var(--cn-dark-accent) !important;
+    border-bottom-color: var(--cn-dark-accent) !important;
+}
+
+/* ── Buscador (portales paciente / médico) ──────────────────────── */
+.pp-home-search {
+    max-width: 36rem;
+    margin-bottom: 1.25rem;
+}
+
+/* Cabecera del dashboard paciente: separación buscador ↔ título (como portal médico) */
+.pp-dashboard-head {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.pp-dashboard-head .pp-home-search {
+    margin-bottom: 0;
+}
+
+.dark .home-search {
+    --home-search-bg: var(--cn-dark-surface-elevated);
+    --home-search-border: var(--cn-dark-border);
+    --home-search-text: var(--cn-dark-text);
+    --home-search-muted: var(--cn-dark-muted);
+    --home-search-accent: var(--cn-dark-accent);
+}
+
+.dark .home-search__wrap:focus-within {
+    border-color: var(--cn-dark-accent) !important;
+    box-shadow: 0 0 0 3px rgba(46, 182, 125, 0.15);
+}
+
+.dark .home-search__item:hover,
+.dark .home-search__item:focus-visible {
+    background: rgba(46, 182, 125, 0.1) !important;
+}
+
+/* ── Dashboard paciente (pd-*) ──────────────────────────────────── */
+.pd-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+}
+
+.pd-stat-card {
+    background: var(--white, #fff);
+    border: 1px solid var(--border, #e5e7eb);
+    border-radius: var(--radius, 10px);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.pd-stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.pd-stat-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.pd-stat-icon--green {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.pd-stat-icon--blue {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.pd-stat-icon--amber {
+    background: #fef9c3;
+    color: #854d0e;
+}
+
+.pd-stat-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--text, #111827);
+    line-height: 1;
+}
+
+.pd-stat-label {
+    font-size: 0.78rem;
+    color: var(--muted, #6b7280);
+    margin-top: 0.25rem;
+}
+
+.pp-quick-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.btn-warn {
+    border-color: #d97706 !important;
+    color: #d97706 !important;
+}
+
+.dark .pd-stat-card {
+    background: var(--cn-dark-surface) !important;
+    border-color: var(--cn-dark-border) !important;
+}
+
+.dark .pd-stat-icon--green {
+    background: rgba(46, 182, 125, 0.2) !important;
+    color: #86efac !important;
+}
+
+.dark .pd-stat-icon--blue {
+    background: rgba(59, 130, 246, 0.2) !important;
+    color: #93c5fd !important;
+}
+
+.dark .pd-stat-icon--amber {
+    background: rgba(234, 179, 8, 0.2) !important;
+    color: #fde047 !important;
+}
+
+.dark .pd-stat-value {
+    color: var(--cn-dark-text) !important;
+}
+
+.dark .pd-stat-label {
+    color: var(--cn-dark-muted) !important;
+}
+
+.dark .btn-warn {
+    border-color: #fbbf24 !important;
+    color: #fbbf24 !important;
+}
+
+.dark .btn-warn:hover {
+    background: rgba(251, 191, 36, 0.1) !important;
+}
+
+@media (max-width: 480px) {
+    .pd-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ── Dashboard médico (dp-*) ────────────────────────────────────── */
+.dark .dp-stat-card {
+    background: var(--cn-dark-surface) !important;
+    border-color: var(--cn-dark-border) !important;
+}
+
+.dark .dp-stat-icon {
+    background: rgba(46, 182, 125, 0.18) !important;
+    color: var(--cn-dark-accent) !important;
+}
+
+.dark .dp-stat-value {
+    color: var(--cn-dark-text) !important;
+}
+
+.dark .dp-stat-label {
+    color: var(--cn-dark-muted) !important;
+}
+
+/* ── Formulario «Editar cuenta» (paciente / médico) — ficha en profile-card.css */
+.dark .profile-form label {
+    color: var(--cn-dark-muted) !important;
+}
+
+.dark .profile-form .checkbox-row label {
+    color: var(--cn-dark-text) !important;
+}
+
+.dark .profile-form .form-section-title {
+    color: var(--cn-dark-text) !important;
+    border-top-color: var(--cn-dark-border) !important;
+}
+
+.dark .profile-form .form-actions {
+    border-top-color: var(--cn-dark-border) !important;
+}
+
+.dark .profile-form .form-hint {
+    color: var(--cn-dark-muted) !important;
+}
+
+.dark .profile-form input[type="text"],
+.dark .profile-form input[type="email"],
+.dark .profile-form input[type="tel"],
+.dark .profile-form input[type="password"],
+.dark .profile-form select,
+.dark .profile-form textarea {
+    background: var(--cn-dark-surface-elevated) !important;
+    border-color: var(--cn-dark-border) !important;
+    color: var(--cn-dark-text) !important;
+}
+
+.dark .profile-form input:focus,
+.dark .profile-form select:focus,
+.dark .profile-form textarea:focus {
+    border-color: var(--cn-dark-accent) !important;
+}
+
+.dark .profile-alert-success {
+    background: rgba(46, 182, 125, 0.18) !important;
+    color: #86efac !important;
+}
+
+.dark .profile-alert-error {
+    background: rgba(127, 29, 29, 0.35) !important;
+    color: #fecaca !important;
+}
+
+/* ── Logins: conmutador fijo esquina ─────────────────────────────── */
+.portal-login-theme-slot {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 50;
+}
