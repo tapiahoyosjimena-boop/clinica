@@ -123,6 +123,8 @@ class InvoiceResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('order.order_number')
                     ->label('Orden')
+                    ->state(fn (Invoice $record): string => $record->order?->order_number
+                        ?? "Orden eliminada (#{$record->order_id})")
                     ->sortable(),
                 Tables\Columns\TextColumn::make('order.patient.full_name')
                     ->label('Paciente')

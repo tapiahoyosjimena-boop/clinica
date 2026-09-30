@@ -88,7 +88,9 @@ class ViewInvoice extends ViewRecord
                 )
                 ->icon('heroicon-o-check-circle')
                 ->color('success')
-                ->visible(fn (): bool => $this->record->status === 'pendiente' || $this->qrPaymentConfirmed
+                ->visible(fn (): bool => ($this->record->status === 'pendiente'
+                    && $this->record->order !== null)
+                    || $this->qrPaymentConfirmed
                 )
                 ->modalSubmitActionLabel(fn (): string => $this->qrPaymentConfirmed ? 'Confirmar' : 'Enviar'
                 )
@@ -114,12 +116,23 @@ class ViewInvoice extends ViewRecord
                             ->icon('heroicon-o-qr-code')
                             ->color('info')
                             ->visible(fn (Get $get): bool => $this->resolveIsQrMethod($get('payment_method_id'))
+                                && $this->record->order !== null
                                 && ! $this->qrPaymentConfirmed
                             )
                             ->action(function (Get $get): void {
                                 $methodId = $get('payment_method_id');
 
                                 if (! $this->resolveIsQrMethod($methodId)) {
+                                    return;
+                                }
+
+                                if (! $this->record->order) {
+                                    Notification::make()
+                                        ->title('No se puede generar el QR')
+                                        ->body('La orden asociada ya no está disponible. Restaure la orden o cree una nueva antes de cobrar.')
+                                        ->danger()
+                                        ->send();
+
                                     return;
                                 }
 
@@ -198,6 +211,16 @@ class ViewInvoice extends ViewRecord
                         $freshInvoice = $this->record->fresh();
 
                         if ($freshInvoice->status !== 'pagada') {
+                            if (! $freshInvoice->order) {
+                                Notification::make()
+                                    ->title('No se puede registrar el pago')
+                                    ->body('La orden asociada ya no está disponible. Restaure la orden antes de continuar.')
+                                    ->danger()
+                                    ->send();
+
+                                throw new Halt;
+                            }
+
                             Notification::make()
                                 ->title('Pago QR pendiente')
                                 ->body('Primero genere el QR y espere que el paciente confirme el pago.')
@@ -335,6 +358,9 @@ JS;
         try {
             DB::transaction(function () use ($data, $receiptService): void {
                 $invoice = $this->record->fresh();
+                if (! $invoice->order) {
+                    throw new \RuntimeException('La orden asociada ya no está disponible. Restaure la orden antes de registrar el pago.');
+                }
                 if ($invoice->status !== 'pendiente') {
                     throw new \RuntimeException('Este comprobante ya no está pendiente.');
                 }

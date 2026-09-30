@@ -19,6 +19,14 @@ class InvoicePolicy
             return false;
         }
 
+        if ($user->hasRole('Administrador') && ! $invoice->order) {
+            return true;
+        }
+
+        if (! $invoice->order) {
+            return false;
+        }
+
         return ResponsibleClinicalStaffScoping::userMayAccessOrderInPanel($user, $invoice->order);
     }
 
